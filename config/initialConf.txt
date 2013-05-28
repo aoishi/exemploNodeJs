@@ -41,3 +41,16 @@ Instalação do modulo adicional:
 npm install formidable
 
 Obs: Não utilizar sudo durante a instalação do modulo adicional.
+
+=================================================================================
+=================================================================================
+=========================ARQUIVO UTILIZADO NO EXEMPLO============================
+=================================================================================
+=================================================================================
+3-)Arquivo utilizado no exemplo:
+
+/tmp/test.png
+
+Criação e permissão ao arquivo:
+
+sudo cat /dev/null > /tmp/test.png
