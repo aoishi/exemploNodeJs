@@ -1,0 +1,43 @@
+=================================================================================
+=================================================================================
+===========================INSTALAÇÃO============================================
+=================================================================================
+=================================================================================
+1-)Instalação:
+
+Ubuntu:
+
+sudo apt-get update
+sudo apt-get install python-software-properties python g++ make
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+
+Debian:
+
+sudo apt-get install python g++ make checkinstall
+mkdir ~/src && cd $_
+wget -N http://nodejs.org/dist/node-latest.tar.gz
+tar xzvf node-latest.tar.gz && cd node-v*
+./configure
+checkinstall #(remove the "v" in front of the version number in the dialog)
+sudo dpkg -i node_*
+
+OSX & Windows:
+
+http://nodejs.org/#download
+
+=================================================================================
+=================================================================================
+===========================MODULOS ADICIONAIS====================================
+=================================================================================
+=================================================================================
+2-)Modulos adicionais utilizados no exemplo:
+
+node-formidable
+
+Instalação do modulo adicional:
+
+npm install formidable
+
+Obs: Não utilizar sudo durante a instalação do modulo adicional.
