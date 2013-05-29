@@ -20,6 +20,37 @@ formidable = require("formidable");
         response.write(body);
         response.end();
     }
+    function textupload(response, request){
+        console.log("Request handler 'textUpload' was called.");
+    	var body = '<html>'+		'<head>'+		'<meta http-equiv="Content-Type" content="text/html; '+ 'charset=UTF-8" />'+		'</head>'+		'<body>'+		'<form action="/showtext" method="post">'+		'<textarea name="text" rows="20" cols="60"></textarea>'+ '<input type="submit" value="Submit text" />'+ '</form>'+
+		'</body>'+	    '</html>';	    response.writeHead(200, {"Content-Type": "text/html"});	    response.write(body);	    response.end();
+    }
+    function showtext(response, request){ 
+    	var postData = "";
+    	request.setEncoding("utf8");		request.addListener("data", function(postDataChunk) { postData += postDataChunk;		console.log("Received POST data chunk '"+ postDataChunk + "'.");		});
+		request.addListener("end", function() { showtextcomplete(response, postData);		});
+    		}
+	function showtextcomplete(response, postData){
+		response.writeHead(200, {"Content-Type": "text/plain"}); 
+    	response.write("You've sent the text: "+ querystring.parse(postData).text);
+    	response.end();
+	}
+	function blocking(response, postData){
+    	sleep(10000);
+		response.writeHead(200, {"Content-Type": "text/plain"}); 
+    	response.write("Wow, what a deep sleep :)");
+    	response.end();
+	}
+	function noblocking(response, postData){
+    	noblockingcomplete(response, postData, function(){		response.writeHead(200, {"Content-Type": "text/plain"}); 
+    	response.write("Wow, what a deep sleep :)");
+    	response.end();});
+	}
+	function noblockingcomplete(response, postData, output){		var startTime = new Date().getTime();		while (new Date().getTime() < startTime + 10000);
+		output();
+
+	}
+	function sleep(milliSeconds) {		var startTime = new Date().getTime();		while (new Date().getTime() < startTime + milliSeconds);	}
     function upload(response, request) {
         console.log("Request handler 'upload' was called.");
         var form = new formidable.IncomingForm();
@@ -57,3 +88,7 @@ formidable = require("formidable");
 exports.start = start;
 exports.upload = upload;
 exports.show = show;
+exports.textupload = textupload;
+exports.showtext = showtext;
+exports.noblocking = noblocking;
+exports.blocking = blocking;
